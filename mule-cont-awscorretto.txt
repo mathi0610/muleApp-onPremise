@@ -1,0 +1,46 @@
+FROM alpine:3.16
+FROM  amazoncorretto:8-al2-jdk
+
+ENV HOME=/opt/mule
+ENV MULE_VERSION=4.4.0
+
+RUN yum update \
+      && echo "Y" | yum install unzip
+
+COPY mule-standalone-$MULE_VERSION.zip ./opt
+
+RUN cd /opt \
+      && unzip *.zip \
+      && rm mule-standalone-$MULE_VERSION.zip \
+      && mv mule-enterprise* ./mule
+      
+WORKDIR $HOME
+
+VOLUME ["$HOME/logs", "$HOME/conf", "$HOME/apps", "$HOME/domains"]
+# Copy and install license
+#CMD echo "------ Copy and install license --------"
+#COPY muleLicenseKey.lic $HOME/conf/
+#RUN $HOME/bin/mule -installLicense $HOME/conf/muleLicenseKey.lic
+
+EXPOSE 8082-8091
+EXPOSE 9000
+EXPOSE 9082
+# HTTPS Port for Anypoint Platform communication
+EXPOSE  443
+# Mule remote debugger
+EXPOSE 5000
+# Mule JMX port (must match Mule config file)
+EXPOSE 1098
+# Mule MMC agent port
+EXPOSE 7777
+# AMC agent port
+EXPOSE 9997
+
+# Mule Cluster ports
+EXPOSE 5701
+EXPOSE 54327
+# HTTP Service Port
+EXPOSE 8081
+# HTTPS Service Port
+EXPOSE 8091
+#ENTRYPOINT ["/mule"]

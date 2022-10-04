@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: clust-svc
+  labels:
+    app: clust
+spec:
+  type: LoadBalancer
+  selector:
+    app: clust
+  ports:
+  - port: 8082 # service port
+    name: hello
+    targetPort: 8082 # port of the container
+    #nodePort: 30001 # port accessible to the external
+  - port: 8081
+    name: publish
+    targetPort: 8081
+    #nodePort: 30000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clust-app # name the app
+spec:
+  selector:
+    matchLabels: #has to match spec.template.metadata.labels
+      app: clust
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: clust
+    spec:
+      containers:
+      - name: k8-clust
+        image:  docker.io/mathi610/cluster
+        ports:
+        - containerPort: 8082
+        - containerPort: 8081

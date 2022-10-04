@@ -1,0 +1,20 @@
+FROM mathi610/muleawscorretto:latest
+
+ARG JARFILE=clust/*.jar
+#ARG JARFIL=clust/test2.jar
+
+COPY $JARFILE apps
+#COPY $JARFIL apps
+
+RUN set -x\
+      && echo "Y" |yum -y install gettext \
+      && echo "Y" | yum install procps 
+
+#WORKDIR $HOME/bin
+
+#RUN ./bin/mule
+
+#SHELL ["/bin/sh", "./bin/mule"]
+
+#CMD ["./bin"]   
+ENTRYPOINT ["./bin/mule"]
