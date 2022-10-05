@@ -16,7 +16,7 @@ pipeline {
         
         stage('Build') {
             steps {
-		    bat 'envsubst < $WORKSPACE\k8-multimule.yaml | kubectl apply -f -'                
+		    bat 'kubectl apply -f k8-multimule.yaml'                
             }
         }
         
