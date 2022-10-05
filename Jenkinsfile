@@ -8,11 +8,11 @@ pipeline {
     
     stages {
         
-       /* stage('login'){
+        stage('login'){
             steps {
-                bat 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW'
+                bat 'echo 'MT9Ai1H97' | docker login -u mathi610 --password-stdin'
             }
-        }*/
+        }
         
         stage('Build') {
             steps {
