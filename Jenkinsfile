@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'echo "Hello World"'                
+                bat 'kubectl apply -f C:\vsCode\docker\multi_mule\test2.yaml'                
             }
         }
     }
