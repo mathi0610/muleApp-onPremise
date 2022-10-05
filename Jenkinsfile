@@ -8,15 +8,15 @@ pipeline {
     
     stages {
         
-        stage('login'){
+       /* stage('login'){
             steps {
                 bat 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW'
             }
-        }
+        }*/
         
         stage('Build') {
             steps {
-                bat 'kubectl apply -f k8-multimule.yaml'                
+		    bat 'envsubst < ${WORKSPACE}\k8-multimule.yaml | kubectl apply -f -'                
             }
         }
         
