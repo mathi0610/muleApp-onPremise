@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'kubectl apply -f test2.yaml'                
+                bat 'kubectl apply -f k8-multimule.yaml'                
             }
         }
     }
