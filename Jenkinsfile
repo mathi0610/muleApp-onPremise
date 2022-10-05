@@ -10,7 +10,7 @@ pipeline {
         
         stage('login'){
             steps {
-                bat 'echo 'MT9Ai1H97' | docker login -u mathi610 --password-stdin'
+                bat 'echo "MT9Ai1H97" | docker login -u mathi610 --password-stdin'
             }
         }
         
