@@ -3,10 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'echo "Hello World"'
-                sh '''
-                    java -version
-                '''
+                bat 'echo "Hello World"'
+                
             }
         }
     }
